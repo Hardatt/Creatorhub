@@ -9,7 +9,7 @@ app.use("/auth", require("@routes/authRoute"));
 app.use("/admin", require("@routes/adminRoute"));
 
 
-app.use((err,res,req,next)=>{
+app.use((err,req,res,next)=>{
   console.error(err.stack);
   res.status(500).json({error: "Internal Server Error"});
 })
