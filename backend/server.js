@@ -3,10 +3,9 @@ const express = require("express");
 const app = express();
 const { sequelize } = require("@models");
 require("dotenv").config();
-
 app.use(express.json());
-app.use("/auth", require("@routes/authRoute"));
-app.use("/admin", require("@routes/adminRoute"));
+// app.use("/auth", require("@routes/authRoute"));
+// app.use("/admin", require("@routes/adminRoute"));
 
 
 app.use((err,req,res,next)=>{

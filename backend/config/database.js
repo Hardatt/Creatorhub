@@ -8,7 +8,13 @@ module.exports = {
     host: process.env.DB_HOST || '127.0.0.1',
     dialect: 'mysql',
     logging: false,
+    pool:{
+      max:5,
+      min:0,
+      idle:10000
+    }
   },
+  
   production: {
     
   }
