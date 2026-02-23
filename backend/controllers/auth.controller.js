@@ -1,19 +1,92 @@
+/**
+ * Auth Controller
+ * Handles register, login, and current-user endpoints.
+ */
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { User } = require("@models");
-const generatetoken  = require("@utils/generatetoken");
+const { Users } = require("@models");
+const { generateToken } = require("@utils/generatetoken");
+const { awardDailyLogin } = require("@services/credit.service");
+const { ActivityLogs } = require("@models");
 
+// ── Register ──────────────────────────────────────────────────────────────────
 exports.register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, name } = req.body;
+
+    const existing = await Users.findOne({ where: { email } });
+    if (existing) {
+      return res.status(409).json({ error: "Email already registered" });
+    }
+
     const hashed = await bcrypt.hash(password, 10);
-    const user = await User.create({
+    const user = await Users.create({
       username,
       email,
       password: hashed,
+      name: name || null,
+      role: "user",
     });
-    res.status(201).json({ "User Created": user });
+
+    const token = generateToken(user);
+
+    return res.status(201).json({
+      message: "Registration successful",
+      token,
+      user: sanitize(user),
+    });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
+
+// ── Login ─────────────────────────────────────────────────────────────────────
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await Users.findOne({ where: { email } });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+
+    const token = generateToken(user);
+
+    // Award daily-login credits (no-op if already claimed today)
+    const loginBonus = await awardDailyLogin(user);
+
+    // Log the login action
+    await ActivityLogs.create({
+      userId: user.id,
+      action: "login",
+      metadata: { loginBonus },
+    });
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      user: sanitize(user),
+      loginBonus,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+// ── Me (current user) ─────────────────────────────────────────────────────────
+exports.me = async (req, res) => {
+  try {
+    const user = await Users.findByPk(req.user.id, {
+      attributes: { exclude: ["password"] },
+    });
+    if (!user) return res.status(404).json({ error: "User not found" });
+    return res.json({ user });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
+// ── Helper ────────────────────────────────────────────────────────────────────
+function sanitize(user) {
+  const { password, ...safe } = user.toJSON();
+  return safe;
+}

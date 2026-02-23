@@ -1,7 +1,45 @@
-# backend
-backend/.env*
+# ── Backend ───────────────────────────────────────────────────
 backend/node_modules/
+backend/.env
+backend/.env.*
 
-# frontend
-frontend/.env*
+# Sequelize auto-generated migration artifacts
+backend/migrations/
+backend/seeders/
+
+# Redis dump file (created when Redis persists to disk)
+dump.rdb
+
+# Backend logs
+backend/logs/
+backend/*.log
+
+# ── Frontend ──────────────────────────────────────────────────
 frontend/node_modules/
+frontend/.env
+frontend/.env.*
+
+# Vite build output
+frontend/dist/
+
+# Vite internal cache
+frontend/.vite/
+
+# ── Root level loose image files ──────────────────────────────
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.mp4
+*.zip
+
+# ── OS files ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Editor ────────────────────────────────────────────────────
+.vscode/
+.idea/
+
+# ── Test coverage ─────────────────────────────────────────────
+coverage/
