@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import api from "../services/api";
 import StatCard from "../components/StatCard";
 
-// ── Tab helpers ───────────────────────────────────────────────────────────────
+
 const TABS = [
   { id: "users",     label: "Users",     icon: Users },
   { id: "reports",   label: "Reports",   icon: Flag },
@@ -20,7 +20,7 @@ export default function Admin() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-5">
-      {/* Tab bar */}
+      {}
       <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-xl p-1">
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
@@ -46,11 +46,11 @@ export default function Admin() {
   );
 }
 
-// ─── Users tab ────────────────────────────────────────────────────────────────
+
 function UsersTab() {
   const [users,   setUsers]   = useState([]);
   const [loading, setLoading] = useState(true);
-  const [adj,     setAdj]     = useState({}); // per-user credit adjust state
+  const [adj,     setAdj]     = useState({}); 
 
   const load = useCallback(async () => {
     try {
@@ -138,7 +138,7 @@ function UsersTab() {
   );
 }
 
-// ─── Reports tab ──────────────────────────────────────────────────────────────
+
 function ReportsTab() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -165,7 +165,7 @@ function ReportsTab() {
 
   return (
     <div className="space-y-3">
-      {/* Filter */}
+      {}
       <div className="flex gap-2">
         {["pending", "reviewed", "dismissed"].map((s) => (
           <button
@@ -229,7 +229,7 @@ function ReportsTab() {
   );
 }
 
-// ─── Logs tab ─────────────────────────────────────────────────────────────────
+
 function LogsTab() {
   const [logs,    setLogs]    = useState([]);
   const [loading, setLoading] = useState(true);
@@ -275,7 +275,7 @@ function LogsTab() {
   );
 }
 
-// ─── Analytics tab ────────────────────────────────────────────────────────────
+
 function AnalyticsTab() {
   const [data,    setData]    = useState(null);
   const [loading, setLoading] = useState(true);
@@ -293,7 +293,7 @@ function AnalyticsTab() {
 
   return (
     <div className="space-y-5">
-      {/* Summary stats */}
+      {}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard icon={Users}  label="Total Users"    value={stats.totalUsers    || 0} color="text-brand-400" />
         <StatCard icon={Flag}   label="Total Reports"  value={stats.totalReports  || 0} color="text-red-400" />
@@ -302,7 +302,7 @@ function AnalyticsTab() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {/* Top users */}
+        {}
         <div className="card space-y-3">
           <h3 className="font-semibold text-white flex items-center gap-2">
             <Users size={16} className="text-brand-400" /> Top Users by Credits
@@ -320,7 +320,7 @@ function AnalyticsTab() {
           </ol>
         </div>
 
-        {/* Most saved posts */}
+        {}
         <div className="card space-y-3">
           <h3 className="font-semibold text-white flex items-center gap-2">
             <BarChart2 size={16} className="text-brand-400" /> Most Saved Posts

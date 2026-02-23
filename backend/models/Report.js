@@ -1,7 +1,6 @@
-/**
- * Report model
- * Stores user-submitted reports against feed posts.
- */
+
+
+
 module.exports = (sequelize, DataTypes) => {
   const Report = sequelize.define("Reports", {
     id: {
@@ -34,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(500),
       allowNull: false,
     },
-    // Admin workflow: pending → reviewed | dismissed
+    
     status: {
       type: DataTypes.ENUM("pending", "reviewed", "dismissed"),
       defaultValue: "pending",

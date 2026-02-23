@@ -4,7 +4,7 @@ const authCtrl = require("@controllers/auth.controller");
 const { authenticate } = require("@middlewares/auth.middleware");
 const { validate } = require("@middlewares/validate.middleware");
 
-// POST /api/auth/register
+
 router.post(
   "/register",
   [
@@ -16,7 +16,7 @@ router.post(
   authCtrl.register
 );
 
-// POST /api/auth/login
+
 router.post(
   "/login",
   [
@@ -27,7 +27,7 @@ router.post(
   authCtrl.login
 );
 
-// GET /api/auth/me  (protected)
+
 router.get("/me", authenticate, authCtrl.me);
 
 module.exports = router;

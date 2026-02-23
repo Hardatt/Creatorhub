@@ -1,7 +1,6 @@
-/**
- * Validation Middleware
- * Runs express-validator checks and returns 422 if any fail.
- */
+
+
+
 const { validationResult } = require("express-validator");
 
 const validate = (req, res, next) => {

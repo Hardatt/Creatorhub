@@ -1,17 +1,15 @@
-/**
- * Cache Service
- * Tries Redis first; falls back to an in-memory Map-based cache
- * so the app works without a running Redis instance.
- */
+
+
+
 const Redis = require("ioredis");
 
 let redisClient = null;
 let redisAvailable = false;
 
-// In-memory fallback store: key -> { value, expiresAt }
+
 const memStore = new Map();
 
-// Attempt Redis connection (non-blocking)
+
 function connectRedis() {
   try {
     redisClient = new Redis({
@@ -19,7 +17,7 @@ function connectRedis() {
       port: parseInt(process.env.REDIS_PORT) || 6379,
       password: process.env.REDIS_PASSWORD || undefined,
       lazyConnect: true,
-      // Do not crash if Redis is down
+      
       enableOfflineQueue: false,
       retryStrategy: () => null,
     });
@@ -45,7 +43,7 @@ function connectRedis() {
 
 connectRedis();
 
-// ---------- In-memory helpers ----------
+
 
 function memGet(key) {
   const entry = memStore.get(key);
@@ -68,13 +66,10 @@ function memDel(key) {
   memStore.delete(key);
 }
 
-// ---------- Public API ----------
 
-/**
- * Get a cached value (parsed JSON).
- * @param {string} key
- * @returns {any|null}
- */
+
+
+
 async function get(key) {
   if (redisAvailable) {
     const raw = await redisClient.get(key);
@@ -83,12 +78,8 @@ async function get(key) {
   return memGet(key);
 }
 
-/**
- * Store a value in cache.
- * @param {string} key
- * @param {any} value  – will be JSON-serialized
- * @param {number} ttlSeconds
- */
+
+
 async function set(key, value, ttlSeconds = 300) {
   if (redisAvailable) {
     await redisClient.set(key, JSON.stringify(value), "EX", ttlSeconds);
@@ -97,10 +88,8 @@ async function set(key, value, ttlSeconds = 300) {
   }
 }
 
-/**
- * Delete a key.
- * @param {string} key
- */
+
+
 async function del(key) {
   if (redisAvailable) {
     await redisClient.del(key);

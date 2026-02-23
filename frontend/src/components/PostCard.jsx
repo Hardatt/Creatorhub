@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
-// Source colour/label config
+
 const SOURCE_META = {
   reddit:   { label: "Reddit",   bg: "bg-orange-500/15", text: "text-orange-400" },
   twitter:  { label: "Twitter",  bg: "bg-sky-500/15",    text: "text-sky-400"    },
@@ -24,7 +24,7 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
   const isSaved = savedPostIds.has(post.id);
   const meta = SOURCE_META[post.source] || { label: post.source, bg: "bg-gray-700", text: "text-gray-400" };
 
-  // ── Save / unsave ──────────────────────────────────────────────────────────
+  
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -53,7 +53,7 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
     }
   };
 
-  // ── Share ──────────────────────────────────────────────────────────────────
+  
   const handleShare = async () => {
     try {
       await navigator.clipboard.writeText(post.url);
@@ -65,7 +65,7 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
     }
   };
 
-  // ── Report ─────────────────────────────────────────────────────────────────
+  
   const handleReport = async () => {
     if (!reportReason.trim() || reportReason.trim().length < 5) {
       toast.error("Please provide a reason (min 5 chars)");
@@ -90,7 +90,7 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
 
   return (
     <article className="card flex flex-col gap-3 hover:border-gray-700 transition-colors">
-      {/* Header */}
+      {}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2 flex-wrap">
           <span className={`badge ${meta.bg} ${meta.text}`}>{meta.label}</span>
@@ -103,19 +103,19 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
         </span>
       </div>
 
-      {/* Title */}
+      {}
       <h3 className="font-semibold text-gray-100 leading-snug line-clamp-2">
         {post.title}
       </h3>
 
-      {/* Content snippet */}
+      {}
       {post.content && (
         <p className="text-sm text-gray-400 line-clamp-3 leading-relaxed">
           {post.content}
         </p>
       )}
 
-      {/* Thumbnail */}
+      {}
       {post.thumbnail && (
         <img
           src={post.thumbnail}
@@ -125,15 +125,15 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
         />
       )}
 
-      {/* Footer */}
+      {}
       <div className="flex items-center justify-between pt-1 border-t border-gray-800">
-        {/* Upvotes */}
+        {}
         <div className="flex items-center gap-1 text-xs text-gray-500">
           <ThumbsUp size={13} />
           <span>{post.upvotes?.toLocaleString() ?? 0}</span>
         </div>
 
-        {/* Actions */}
+        {}
         <div className="flex items-center gap-1">
           <button
             onClick={handleSave}
@@ -179,7 +179,7 @@ export default function PostCard({ post, savedPostIds = new Set(), onSaveToggle 
         </div>
       </div>
 
-      {/* Inline report form */}
+      {}
       {showReport && (
         <div className="pt-2 border-t border-gray-800 flex gap-2">
           <input

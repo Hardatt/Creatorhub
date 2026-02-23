@@ -1,10 +1,9 @@
-/**
- * Credit Controller
- * Exposes credit balance and history to users.
- */
+
+
+
 const { Users, CreditHistories } = require("@models");
 
-// ── Get balance ───────────────────────────────────────────────────────────────
+
 exports.getBalance = async (req, res) => {
   try {
     const user = await Users.findByPk(req.user.id, {
@@ -17,7 +16,7 @@ exports.getBalance = async (req, res) => {
   }
 };
 
-// ── Get history ───────────────────────────────────────────────────────────────
+
 exports.getHistory = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;

@@ -1,8 +1,6 @@
-/**
- * Admin Controller
- * Admin-only endpoints: user management, credit adjustments,
- * reported post review, activity logs, and analytics.
- */
+
+
+
 const { Op } = require("sequelize");
 const {
   Users,
@@ -13,7 +11,7 @@ const {
 } = require("@models");
 const { adjustCredits } = require("@services/credit.service");
 
-// ── List all users (with credit balances) ─────────────────────────────────────
+
 exports.getAllUsers = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -38,7 +36,7 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-// ── Adjust a user's credits manually ─────────────────────────────────────────
+
 exports.adjustUserCredits = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -62,7 +60,7 @@ exports.adjustUserCredits = async (req, res) => {
   }
 };
 
-// ── Get all reports ───────────────────────────────────────────────────────────
+
 exports.getAllReports = async (req, res) => {
   try {
     const { status } = req.query;
@@ -80,7 +78,7 @@ exports.getAllReports = async (req, res) => {
   }
 };
 
-// ── Update report status ──────────────────────────────────────────────────────
+
 exports.updateReportStatus = async (req, res) => {
   try {
     const { reportId } = req.params;
@@ -96,7 +94,7 @@ exports.updateReportStatus = async (req, res) => {
   }
 };
 
-// ── Get activity logs (all users) ─────────────────────────────────────────────
+
 exports.getActivityLogs = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -121,17 +119,17 @@ exports.getActivityLogs = async (req, res) => {
   }
 };
 
-// ── Analytics ─────────────────────────────────────────────────────────────────
+
 exports.getAnalytics = async (req, res) => {
   try {
-    // Top 10 users by credits
+    
     const topUsers = await Users.findAll({
       attributes: { exclude: ["password"] },
       order: [["credits", "DESC"]],
       limit: 10,
     });
 
-    // Most saved posts (top 10 by save count)
+    
     const { sequelize } = require("@models");
     const mostSaved = await SavedPosts.findAll({
       attributes: [
@@ -146,7 +144,7 @@ exports.getAnalytics = async (req, res) => {
       limit: 10,
     });
 
-    // Total counts
+    
     const totalUsers = await Users.count();
     const totalReports = await Reports.count();
     const pendingReports = await Reports.count({ where: { status: "pending" } });

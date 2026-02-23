@@ -1,7 +1,6 @@
-/**
- * User model
- * Stores credentials, role, credit balance, profile info, and login tracking.
- */
+
+
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define("Users", {
     id: {
@@ -31,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    // Profile fields
+    
     name: {
       type: DataTypes.STRING(100),
       allowNull: true,
@@ -44,12 +43,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(500),
       allowNull: true,
     },
-    // Tracks whether profile is fully completed (triggers +20 credit bonus once)
+    
     isProfileComplete: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    // Tracks last login date for daily login credit
+    
     lastLoginDate: {
       type: DataTypes.DATEONLY,
       allowNull: true,
@@ -59,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
   });
 
-  // Associations defined here and called from index.js
+  
   User.associate = (models) => {
     User.hasMany(models.CreditHistories, { foreignKey: "userId", as: "creditHistory" });
     User.hasMany(models.SavedPosts, { foreignKey: "userId", as: "savedPosts" });

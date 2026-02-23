@@ -1,7 +1,6 @@
-/**
- * CreditHistory model
- * Records every credit transaction (earn or deduct) for a user.
- */
+
+
+
 module.exports = (sequelize, DataTypes) => {
   const CreditHistory = sequelize.define("CreditHistories", {
     id: {
@@ -14,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: { model: "users", key: "id" },
     },
-    // Positive = earned, negative = deducted
+    
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -23,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM("earn", "deduct"),
       allowNull: false,
     },
-    // Human-readable reason e.g. "Daily login", "Liked post"
+    
     reason: {
       type: DataTypes.STRING(255),
       allowNull: false,

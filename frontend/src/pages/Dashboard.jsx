@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [history,    setHistory]    = useState([]);
   const [loading,    setLoading]    = useState(true);
 
-  // Profile edit state
+  
   const [editing, setEditing]       = useState(false);
   const [editForm, setEditForm]     = useState({ name: "", bio: "", avatar: "" });
   const [saving,   setSaving]       = useState(false);
@@ -77,7 +77,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
-      {/* Stat cards */}
+      {}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <StatCard
           icon={Coins}
@@ -101,7 +101,7 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Profile card */}
+        {}
         <div className="card space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-white">Profile</h2>
@@ -113,7 +113,7 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* Avatar */}
+          {}
           <div className="flex items-center gap-3">
             <div className="w-14 h-14 rounded-full bg-brand-600 flex items-center justify-center text-xl font-bold text-white shrink-0">
               {profile?.name?.[0]?.toUpperCase() || profile?.username?.[0]?.toUpperCase()}
@@ -169,7 +169,7 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Credit history */}
+        {}
         <div className="card space-y-4">
           <h2 className="font-semibold text-white">Credit History</h2>
           {history.length === 0 ? (
@@ -188,7 +188,7 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Recent activity */}
+        {}
         <div className="card space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-white">Recent Activity</h2>
@@ -197,7 +197,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Saved posts preview */}
+      {}
       {savedPosts.length > 0 && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
@@ -226,7 +226,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Credit guide */}
+      {}
       <div className="card bg-gradient-to-br from-brand-600/20 to-purple-600/10 border-brand-600/30">
         <div className="flex items-start gap-3">
           <Zap size={20} className="text-brand-400 shrink-0 mt-0.5" />

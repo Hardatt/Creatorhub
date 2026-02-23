@@ -1,11 +1,10 @@
-/**
- * Report Controller
- * Users report inappropriate feed posts.
- */
+
+
+
 const { Reports, ActivityLogs } = require("@models");
 const { awardInteraction } = require("@services/credit.service");
 
-// ── Submit report ─────────────────────────────────────────────────────────────
+
 exports.createReport = async (req, res) => {
   try {
     const { postId, title, source, url, reason } = req.body;
@@ -19,7 +18,7 @@ exports.createReport = async (req, res) => {
       reason,
     });
 
-    // Award interaction credit
+    
     const { newBalance } = await awardInteraction(req.user.id, "report_post");
 
     await ActivityLogs.create({
@@ -34,7 +33,7 @@ exports.createReport = async (req, res) => {
   }
 };
 
-// ── Get user's own reports ────────────────────────────────────────────────────
+
 exports.getMyReports = async (req, res) => {
   try {
     const reports = await Reports.findAll({

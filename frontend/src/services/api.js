@@ -5,7 +5,7 @@ const api = axios.create({
   timeout: 15000,
 });
 
-// Attach stored token on every request (in case header wasn't set yet)
+
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token && !config.headers["Authorization"]) {
@@ -14,7 +14,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Global 401 handling – redirect to login
+
 api.interceptors.response.use(
   (res) => res,
   (err) => {

@@ -1,7 +1,6 @@
-/**
- * SavedPost model
- * Stores posts a user has bookmarked from the feed.
- */
+
+
+
 module.exports = (sequelize, DataTypes) => {
   const SavedPost = sequelize.define("SavedPosts", {
     id: {
@@ -14,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: { model: "users", key: "id" },
     },
-    // External post identifier (e.g. Reddit post ID)
+    
     postId: {
       type: DataTypes.STRING(100),
       allowNull: false,
@@ -27,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    // 'reddit' | 'twitter' | 'linkedin'
+    
     source: {
       type: DataTypes.STRING(30),
       allowNull: false,
@@ -51,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: "saved_posts",
     timestamps: true,
-    // Prevent duplicate saves for the same user+post
+    
     indexes: [
       { unique: true, fields: ["userId", "postId"] },
     ],

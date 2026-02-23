@@ -6,7 +6,7 @@ const { validate } = require("@middlewares/validate.middleware");
 
 router.use(authenticate);
 
-// POST /api/reports
+
 router.post(
   "/",
   [
@@ -18,7 +18,7 @@ router.post(
   reportCtrl.createReport
 );
 
-// GET  /api/reports/mine
+
 router.get("/mine", reportCtrl.getMyReports);
 
 module.exports = router;

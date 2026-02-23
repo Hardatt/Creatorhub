@@ -22,7 +22,7 @@ export default function Sidebar({ open, onClose }) {
 
   return (
     <>
-      {/* Mobile overlay */}
+      {}
       {open && (
         <div
           className="fixed inset-0 bg-black/60 z-20 lg:hidden"
@@ -30,7 +30,7 @@ export default function Sidebar({ open, onClose }) {
         />
       )}
 
-      {/* Sidebar panel */}
+      {}
       <aside
         className={`
           fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 border-r border-gray-800
@@ -39,7 +39,7 @@ export default function Sidebar({ open, onClose }) {
           ${open ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        {/* Logo */}
+        {}
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-800">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
@@ -52,7 +52,7 @@ export default function Sidebar({ open, onClose }) {
           </button>
         </div>
 
-        {/* Nav */}
+        {}
         <nav className="flex-1 px-3 py-4 space-y-1">
           {navItems.map(({ to, icon: Icon, label }) => (
             <NavLink
@@ -88,7 +88,7 @@ export default function Sidebar({ open, onClose }) {
           )}
         </nav>
 
-        {/* User card + logout */}
+        {}
         <div className="px-3 py-4 border-t border-gray-800">
           <div className="flex items-center gap-3 px-3 mb-3">
             <div className="w-9 h-9 rounded-full bg-brand-600 flex items-center justify-center font-bold text-white text-sm shrink-0">

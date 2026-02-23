@@ -28,7 +28,7 @@ const sequelize = new Sequelize(
 
 const db = {};
 
-// Auto-load all model files in this directory
+
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
@@ -43,7 +43,7 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-// Run associations after all models are loaded
+
 Object.keys(db).forEach((modelName) => {
   if (typeof db[modelName].associate === "function") {
     db[modelName].associate(db);

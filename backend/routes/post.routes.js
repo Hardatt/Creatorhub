@@ -6,10 +6,10 @@ const { validate } = require("@middlewares/validate.middleware");
 
 router.use(authenticate);
 
-// GET    /api/posts/saved
+
 router.get("/saved", postCtrl.getSavedPosts);
 
-// POST   /api/posts/save
+
 router.post(
   "/save",
   [
@@ -22,10 +22,10 @@ router.post(
   postCtrl.savePost
 );
 
-// DELETE /api/posts/save/:postId
+
 router.delete("/save/:postId", postCtrl.unsavePost);
 
-// POST   /api/posts/share
+
 router.post(
   "/share",
   [body("postId").notEmpty(), body("source").notEmpty()],

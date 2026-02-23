@@ -1,12 +1,11 @@
-/**
- * User Controller
- * Profile read / update endpoints.
- */
+
+
+
 const { Users } = require("@models");
 const { awardProfileComplete } = require("@services/credit.service");
 const { ActivityLogs } = require("@models");
 
-// ── Get profile ───────────────────────────────────────────────────────────────
+
 exports.getProfile = async (req, res) => {
   try {
     const user = await Users.findByPk(req.user.id, {
@@ -19,7 +18,7 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-// ── Update profile ────────────────────────────────────────────────────────────
+
 exports.updateProfile = async (req, res) => {
   try {
     const { name, bio, avatar } = req.body;
@@ -29,7 +28,7 @@ exports.updateProfile = async (req, res) => {
 
     await user.update({ name, bio, avatar });
 
-    // Check if profile is now complete and award bonus (once)
+    
     let profileBonus = null;
     if (name && bio && avatar && !user.isProfileComplete) {
       profileBonus = await awardProfileComplete(user);
@@ -48,7 +47,7 @@ exports.updateProfile = async (req, res) => {
   }
 };
 
-// ── Get recent activity ───────────────────────────────────────────────────────
+
 exports.getActivity = async (req, res) => {
   try {
     const logs = await ActivityLogs.findAll({

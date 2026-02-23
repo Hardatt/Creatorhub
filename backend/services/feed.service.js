@@ -1,38 +1,20 @@
-/**
- * Feed Service
- * Fetches posts from multiple sources, normalises them into a
- * unified schema, and caches the result.
- *
- * Sources:
- *  - Reddit  (real API – no auth required for public subs)
- *  - Twitter (mock data)
- *  - LinkedIn (mock data)
- */
+
+
+
 const axios = require("axios");
 const cache = require("@services/cache.service");
 
 const CACHE_KEY = "unified_feed";
-const CACHE_TTL = parseInt(process.env.FEED_CACHE_TTL) || 300; // 5 min
+const CACHE_TTL = parseInt(process.env.FEED_CACHE_TTL) || 300; 
 
-// Subreddits to pull from
+
 const SUBREDDITS = (process.env.REDDIT_SUBREDDITS || "programming,webdev,javascript")
   .split(",")
   .map((s) => s.trim());
 
-// ─── Normalised post schema ───────────────────────────────────────────────────
-// {
-//   id: string,
-//   title: string,
-//   content: string,
-//   source: 'reddit' | 'twitter' | 'linkedin',
-//   url: string,
-//   author: string,
-//   thumbnail: string | null,
-//   upvotes: number,
-//   publishedAt: ISO string,
-// }
 
-// ─── Reddit ──────────────────────────────────────────────────────────────────
+
+
 async function fetchReddit() {
   const posts = [];
 
@@ -70,7 +52,7 @@ async function fetchReddit() {
   return posts;
 }
 
-// ─── Twitter mock ─────────────────────────────────────────────────────────────
+
 function getMockTwitter() {
   const mockTweets = [
     {
@@ -138,7 +120,7 @@ function getMockTwitter() {
   return mockTweets;
 }
 
-// ─── LinkedIn mock ────────────────────────────────────────────────────────────
+
 function getMockLinkedIn() {
   const mockPosts = [
     {
@@ -194,13 +176,10 @@ function getMockLinkedIn() {
   return mockPosts;
 }
 
-// ─── Unified aggregator ──────────────────────────────────────────────────────
-/**
- * Returns a combined, sorted feed from all sources.
- * Results are cached for CACHE_TTL seconds.
- */
+
+
 async function getUnifiedFeed() {
-  // Try cache first
+  
   const cached = await cache.get(CACHE_KEY);
   if (cached) return cached;
 
@@ -210,7 +189,7 @@ async function getUnifiedFeed() {
     Promise.resolve(getMockLinkedIn()),
   ]);
 
-  // Combine and sort newest first
+  
   const unified = [...redditPosts, ...twitterPosts, ...linkedinPosts].sort(
     (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
   );
@@ -220,9 +199,8 @@ async function getUnifiedFeed() {
   return unified;
 }
 
-/**
- * Invalidate cached feed (useful after manual refresh requests).
- */
+
+
 async function invalidateFeedCache() {
   await cache.del(CACHE_KEY);
 }

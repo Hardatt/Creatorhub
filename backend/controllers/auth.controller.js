@@ -1,14 +1,13 @@
-/**
- * Auth Controller
- * Handles register, login, and current-user endpoints.
- */
+
+
+
 const bcrypt = require("bcrypt");
 const { Users } = require("@models");
 const { generateToken } = require("@utils/generatetoken");
 const { awardDailyLogin } = require("@services/credit.service");
 const { ActivityLogs } = require("@models");
 
-// ── Register ──────────────────────────────────────────────────────────────────
+
 exports.register = async (req, res) => {
   try {
     const { username, email, password, name } = req.body;
@@ -39,7 +38,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// ── Login ─────────────────────────────────────────────────────────────────────
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -51,10 +50,10 @@ exports.login = async (req, res) => {
 
     const token = generateToken(user);
 
-    // Award daily-login credits (no-op if already claimed today)
+    
     const loginBonus = await awardDailyLogin(user);
 
-    // Log the login action
+    
     await ActivityLogs.create({
       userId: user.id,
       action: "login",
@@ -72,7 +71,7 @@ exports.login = async (req, res) => {
   }
 };
 
-// ── Me (current user) ─────────────────────────────────────────────────────────
+
 exports.me = async (req, res) => {
   try {
     const user = await Users.findByPk(req.user.id, {
@@ -85,7 +84,7 @@ exports.me = async (req, res) => {
   }
 };
 
-// ── Helper ────────────────────────────────────────────────────────────────────
+
 function sanitize(user) {
   const { password, ...safe } = user.toJSON();
   return safe;

@@ -33,12 +33,12 @@ export default function Feed() {
     }
   }, []);
 
-  // Load saved post IDs so cards show correct bookmark state
+  
   const fetchSavedIds = useCallback(async () => {
     try {
       const { data } = await api.get("/posts/saved?limit=200");
       setSavedIds(new Set(data.posts.map((p) => p.postId)));
-    } catch { /* ignore */ }
+    } catch {  }
   }, []);
 
   useEffect(() => {
@@ -81,9 +81,9 @@ export default function Feed() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-5">
-      {/* Toolbar */}
+      {}
       <div className="flex flex-wrap items-center justify-between gap-3">
-        {/* Source filters */}
+        {}
         <div className="flex items-center gap-2 flex-wrap">
           <Filter size={15} className="text-gray-500" />
           {SOURCES.map((s) => (
@@ -101,7 +101,7 @@ export default function Feed() {
           ))}
         </div>
 
-        {/* Refresh */}
+        {}
         <button
           onClick={handleRefresh}
           disabled={refreshing}
@@ -112,7 +112,7 @@ export default function Feed() {
         </button>
       </div>
 
-      {/* Feed grid */}
+      {}
       {loading ? (
         <div className="flex items-center justify-center h-64">
           <Loader2 size={32} className="animate-spin text-brand-500" />
@@ -134,7 +134,7 @@ export default function Feed() {
             ))}
           </div>
 
-          {/* Load more */}
+          {}
           {page < totalPages && (
             <div className="flex justify-center pt-2">
               <button onClick={handleLoadMore} className="btn-ghost text-sm">

@@ -26,7 +26,7 @@ export default function SavedPosts() {
 
   useEffect(() => { fetchSaved(); }, [fetchSaved]);
 
-  // Client-side search filter
+  
   useEffect(() => {
     const q = search.toLowerCase();
     setFiltered(
@@ -40,7 +40,7 @@ export default function SavedPosts() {
 
   const handleSaveToggle = (postId, nowSaved) => {
     if (!nowSaved) {
-      // Remove from local list immediately after unsave
+      
       setPosts((prev) => prev.filter((p) => p.postId !== postId));
       setSavedIds((prev) => {
         const next = new Set(prev);
@@ -60,7 +60,7 @@ export default function SavedPosts() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-5">
-      {/* Header */}
+      {}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Bookmark size={18} className="text-brand-400" />
@@ -72,7 +72,7 @@ export default function SavedPosts() {
           </h2>
         </div>
 
-        {/* Search */}
+        {}
         <div className="relative">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
           <input

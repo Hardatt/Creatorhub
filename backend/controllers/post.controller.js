@@ -1,11 +1,10 @@
-/**
- * Post Controller
- * Handles save / unsave / share / list saved posts.
- */
+
+
+
 const { SavedPosts, ActivityLogs } = require("@models");
 const { awardInteraction } = require("@services/credit.service");
 
-// ── Save post ─────────────────────────────────────────────────────────────────
+
 exports.savePost = async (req, res) => {
   try {
     const { postId, title, content, source, url, author, thumbnail, upvotes } =
@@ -20,7 +19,7 @@ exports.savePost = async (req, res) => {
       return res.status(409).json({ error: "Post already saved" });
     }
 
-    // Award interaction credit
+    
     const { newBalance } = await awardInteraction(req.user.id, "save_post");
 
     await ActivityLogs.create({
@@ -35,7 +34,7 @@ exports.savePost = async (req, res) => {
   }
 };
 
-// ── Unsave post ───────────────────────────────────────────────────────────────
+
 exports.unsavePost = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -54,7 +53,7 @@ exports.unsavePost = async (req, res) => {
   }
 };
 
-// ── Get saved posts ───────────────────────────────────────────────────────────
+
 exports.getSavedPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -79,7 +78,7 @@ exports.getSavedPosts = async (req, res) => {
   }
 };
 
-// ── Share post (log + credit) ─────────────────────────────────────────────────
+
 exports.sharePost = async (req, res) => {
   try {
     const { postId, title, source, url } = req.body;

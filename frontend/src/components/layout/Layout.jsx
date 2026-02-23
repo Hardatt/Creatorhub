@@ -8,10 +8,10 @@ export default function Layout() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-950">
-      {/* Sidebar – hidden on mobile, toggleable */}
+      {}
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Main content */}
+      {}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Topbar onMenuClick={() => setSidebarOpen(true)} />
 

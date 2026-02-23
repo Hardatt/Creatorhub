@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
   });
   const [loading, setLoading] = useState(false);
 
-  // Sync axios default header whenever token changes
+  
   useEffect(() => {
     if (token) {
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   }, []);
 
-  // Refresh user data from server (used after credit changes, etc.)
+  
   const refreshUser = useCallback(async () => {
     if (!token) return;
     try {

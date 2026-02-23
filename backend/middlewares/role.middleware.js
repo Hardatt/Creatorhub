@@ -1,12 +1,9 @@
-/**
- * Role Middleware
- * Restricts access to routes based on user role.
- * Must be used AFTER authenticate().
- */
 
-/**
- * @param {...string} roles - allowed roles, e.g. authorise('admin')
- */
+
+
+
+
+
 const authorise = (...roles) => {
   return (req, res, next) => {
     if (!req.user) {

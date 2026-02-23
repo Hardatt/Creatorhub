@@ -1,8 +1,6 @@
-/**
- * Auth Middleware
- * Validates the Bearer JWT token and attaches the decoded payload
- * to req.user for downstream handlers.
- */
+
+
+
 const jwt = require("jsonwebtoken");
 
 const authenticate = (req, res, next) => {
@@ -16,7 +14,7 @@ const authenticate = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id, role, iat, exp }
+    req.user = decoded; 
     next();
   } catch (err) {
     const message =
