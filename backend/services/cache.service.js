@@ -33,11 +33,11 @@ function connectRedis() {
 
     redisClient.connect().catch(() => {
       redisAvailable = false;
-      console.log("[Cache] Redis unavailable – using in-memory fallback");
+      console.log("[Cache] Redis unavailable using in-memory fallback");
     });
   } catch {
     redisAvailable = false;
-    console.log("[Cache] Redis init failed – using in-memory fallback");
+    console.log("[Cache] Redis init failed using in-memory fallback");
   }
 }
 
